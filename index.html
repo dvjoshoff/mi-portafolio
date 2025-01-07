@@ -1,16 +1,98 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navbar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/framer-motion@10.8.0/dist/framer-motion.min.js"></script>
+</head>
+<body>
+  <nav id="navbar" class="fixed w-full z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div id="navbar-brand" class="text-white font-bold text-xl">
+          <span class="text-red-600">Joshua</span>Guzman
+        </div>
 
-    <title>Portafolio</title>
-    <script type="module" crossorigin src="/assets/index-BZ48qYrx.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index--r1RwVhc.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+        <!-- Desktop Menu -->
+        <div id="desktop-menu" class="hidden md:block">
+          <div class="ml-10 flex items-baseline space-x-8">
+            <a href="#" class="nav-link text-white transition-colors hover:scale-105">Home</a>
+            <a href="#" class="nav-link text-white transition-colors hover:scale-105">Proyectos</a>
+            <a href="#" class="nav-link text-white transition-colors hover:scale-105">Conóceme</a>
+            <a href="#" class="nav-link text-white transition-colors hover:scale-105">Contáctame</a>
+            <a href="https://wa.me/573242472601" target="_blank" rel="noopener noreferrer" class="gradient-button">Iniciar Proyecto</a>
+          </div>
+        </div>
+
+        <!-- Mobile menu button -->
+        <div class="md:hidden">
+          <button id="mobile-menu-button" class="text-gray-400 hover:text-white transition-colors">
+            <svg id="menu-icon" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 6h18M3 12h18M3 18h18"></path>
+            </svg>
+            <svg id="close-icon" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+              <path d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden bg-black/95 backdrop-blur-sm border-t border-red-900/20" style="display:none;">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="#" class="text-gray-300 hover:text-white hover:bg-red-900/20 block px-3 py-2 rounded-md text-base font-medium transition-colors">Home</a>
+        <a href="#" class="text-gray-300 hover:text-white hover:bg-red-900/20 block px-3 py-2 rounded-md text-base font-medium transition-colors">Proyectos</a>
+        <a href="#" class="text-gray-300 hover:text-white hover:bg-red-900/20 block px-3 py-2 rounded-md text-base font-medium transition-colors">Conóceme</a>
+        <a href="#" class="text-gray-300 hover:text-white hover:bg-red-900/20 block px-3 py-2 rounded-md text-base font-medium transition-colors">Contáctame</a>
+        <br />
+        <a href="https://wa.me/573242472601" target="_blank" rel="noopener noreferrer" class="w-full gradient-button mt-4">Iniciar Proyecto</a>
+      </div>
+      <br />
+    </div>
+  </nav>
+
+  <script>
+    let scrolled = false;
+    let isOpen = false;
+    const navbar = document.getElementById('navbar');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuButton = document.getElementById('mobile-menu-button');
+    const closeIcon = document.getElementById('close-icon');
+    const menuIcon = document.getElementById('menu-icon');
+
+    // Scroll effect
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        if (!scrolled) {
+          scrolled = true;
+          navbar.classList.add('bg-black/95', 'backdrop-blur-sm', 'shadow-lg', 'shadow-red-900/10');
+          navbar.classList.remove('bg-transparent');
+        }
+      } else {
+        if (scrolled) {
+          scrolled = false;
+          navbar.classList.remove('bg-black/95', 'backdrop-blur-sm', 'shadow-lg', 'shadow-red-900/10');
+          navbar.classList.add('bg-transparent');
+        }
+      }
+    });
+
+    // Mobile menu toggle
+    menuButton.addEventListener('click', () => {
+      isOpen = !isOpen;
+      if (isOpen) {
+        mobileMenu.style.display = 'block';
+        closeIcon.style.display = 'block';
+        menuIcon.style.display = 'none';
+      } else {
+        mobileMenu.style.display = 'none';
+        closeIcon.style.display = 'none';
+        menuIcon.style.display = 'block';
+      }
+    });
+  </script>
+</body>
 </html>
